@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Music - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcbb",
+                    "on-surface-variant": "#cbc3d7",
+                    "surface-container-low": "#1a1b20",
+                    "on-tertiary": "#482900",
+                    "surface-container-lowest": "#0d0e12",
+                    "surface-container": "#1f1f24",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "tertiary-container": "#ca801e",
+                    "on-secondary-container": "#bea8ff",
+                    "inverse-surface": "#e3e2e7",
+                    "outline-variant": "#494454",
+                    "background": "#121317",
+                    "surface-container-high": "#292a2e",
+                    "surface-container-highest": "#343439",
+                    "error": "#ffb4ab",
+                    "secondary-container": "#4f319c",
+                    "surface-variant": "#343439",
+                    "secondary": "#cebdff",
+                    "surface-tint": "#d0bcff",
+                    "inverse-on-surface": "#2f3035",
+                    "on-tertiary-fixed": "#2c1700",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-tertiary-container": "#3f2300",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed": "#e8ddff",
+                    "surface-dim": "#121317",
+                    "primary-fixed-dim": "#d0bcff",
+                    "primary": "#d0bcff",
+                    "on-secondary-fixed": "#21005e",
+                    "on-surface": "#e3e2e7",
+                    "on-primary-fixed": "#23005c",
+                    "on-secondary-fixed-variant": "#4f319c",
+                    "surface-bright": "#38393d",
+                    "primary-fixed": "#e9ddff",
+                    "on-primary-container": "#340080",
+                    "outline": "#958ea0",
+                    "on-error": "#690005",
+                    "tertiary": "#ffb869",
+                    "inverse-primary": "#6d3bd7",
+                    "error-container": "#93000a",
+                    "on-background": "#e3e2e7",
+                    "secondary-fixed-dim": "#cebdff",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "on-secondary": "#381385",
+                    "primary-container": "#a078ff",
+                    "on-primary": "#3c0091",
+                    "surface": "#121317"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "64px",
+                    "gutter": "24px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "xl": "40px",
+                    "unit": "4px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "display-lg-mobile": ["Geist"],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d0e12;
+            color: #e3e2e7;
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-search {
+            background: rgba(31, 31, 36, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(73, 68, 84, 0.3);
+        }
+        .genre-card {
+            aspect-ratio: 1 / 1;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .genre-card:hover {
+            transform: scale(1.05);
+        }
+        .track-row:hover {
+            background: rgba(208, 188, 255, 0.08);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #494454;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-surface-container-lowest">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-full w-64 flex flex-col h-full p-lg overflow-y-auto bg-surface-container-lowest border-r border-outline-variant hidden md:flex z-50">
+<div class="mb-2xl">
+<span class="text-headline-md font-headline-md text-primary tracking-tighter">Aura</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Premium Audio</p>
+</div>
+<nav class="flex flex-col gap-sm flex-grow">
+<a class="flex items-center gap-md p-sm text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-md p-sm text-primary font-bold transition-colors duration-200 font-body-md text-body-md scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span>Search</span>
+</a>
+<a class="flex items-center gap-md p-sm text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="library_music">library_music</span>
+<span>Library</span>
+</a>
+<div class="mt-xl">
+<button class="w-full py-md px-lg bg-primary-container text-on-primary-container rounded-xl font-label-sm text-label-sm hover:opacity-90 transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Create Playlist
+                </button>
+</div>
+<div class="mt-2xl flex flex-col gap-sm">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest px-sm mb-xs">Your Music</p>
+<a class="flex items-center gap-md p-sm text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                    Liked Songs
+                </a>
+<a class="flex items-center gap-md p-sm text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                    Discover Weekly
+                </a>
+</div>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant flex items-center gap-md">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A portrait of a stylish person with a minimal urban aesthetic, soft natural lighting hitting their face against a deep navy background. The person looks confident and peaceful, representing the Aura music brand's premium and sophisticated user base. Cinematic color grading with subtle electric violet hints." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk4XVCwoxQGyRQ3O9ZWnmpzuQU5o_Z5untO_csSaHxUoY-3uSFj4MYRULYucAIdv1mjusbyNc8TCK01kBY_Rp_CN22_v7tit9X2ArdE5n3GJIskC9Kz6v0nSYwn5sGrakkCZFnNFrqQRA6ypQoA5Ms30qWtHM4GrDS046pR1M_imQNivo5r8qxKr9k6mP7zrFvQcQKRsYRIzEZsUqtEllfRm47i4u5affOcbLLaiMdKF_A-vzalsx226vQQNN4vTqpCAm_GgkA-t4"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-bold">User Profile</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Premium Plan</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-h-screen md:ml-64 relative pb-24">
+<!-- TopNavBar Anchor -->
+<header class="flex justify-between items-center px-lg py-md w-full z-40 sticky top-0 bg-background/80 backdrop-blur-md">
+<div class="flex items-center gap-lg flex-1">
+<div class="relative w-full max-w-xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full h-12 pl-12 pr-4 glass-search rounded-full text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary/40 placeholder:text-on-surface-variant/50" placeholder="Artists, songs, or podcasts" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm ml-lg">
+<button class="hover:bg-surface-container-high rounded-full p-2 transition-all duration-300 text-on-background">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-container-high rounded-full p-2 transition-all duration-300 text-on-background">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-lg md:p-xl space-y-xl">
+<!-- Filters / Tab Bar -->
+<div class="flex items-center gap-sm overflow-x-auto no-scrollbar pb-xs">
+<button class="px-lg py-sm bg-primary text-on-primary rounded-full font-label-sm text-label-sm whitespace-nowrap">All</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors rounded-full font-label-sm text-label-sm whitespace-nowrap">Songs</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors rounded-full font-label-sm text-label-sm whitespace-nowrap">Artists</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors rounded-full font-label-sm text-label-sm whitespace-nowrap">Albums</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors rounded-full font-label-sm text-label-sm whitespace-nowrap">Playlists</button>
+</div>
+<!-- Browse All Section (Bento-ish Grid) -->
+<section>
+<div class="flex justify-between items-end mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Browse all</h2>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Show All</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-md">
+<!-- Genre Cards -->
+<div class="genre-card relative overflow-hidden rounded-xl bg-primary-container p-md cursor-pointer group">
+<span class="font-headline-md text-headline-md text-on-primary-container relative z-10">Pop</span>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rotate-[25deg] shadow-xl transition-transform group-hover:rotate-[15deg]">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Vibrant pop music album cover art with neon pink and bright cyan aesthetic, featuring a bold geometric pattern and polished digital textures. High energy, contemporary visual style that pops against the dark UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQK686xd5Q-5nkhUh00nNiGGnIwfYyT2ET-DWHXHw4dk9lJNnA2Skc2g5NEuJhq1-h39iX0x7YpOham4hUmscaacC5A6zp7iAfwun7syXUhWzNNOgmU26gHbiff-jYvZBfY4aEadGDD1YdYqBWfh63hHZZCm_1e8zcweK-DKbqUrtjJB9gGml33uIA2xWKCRm64ENxzVPN1EfYwZhL08T2PRoVI4fGkBQiXsQfSGnEjf-57yB17Inj-MIPXyYuQF16T1Qo7fgwuOk"/>
+</div>
+</div>
+<div class="genre-card relative overflow-hidden rounded-xl bg-[#2D46B9] p-md cursor-pointer group">
+<span class="font-headline-md text-headline-md text-white relative z-10">Chill</span>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rotate-[25deg] shadow-xl transition-transform group-hover:rotate-[15deg]">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Atmospheric landscape photography showing a sunset over a calm ocean in shades of deep indigo and soft violet. Low contrast, dreamy mood, representing relaxed chill music. The composition is minimal and elegant, fitting the Aura brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsC5j3ydORDwCBESbHcfAt7utgEMi2ZbkpfC0se3MwjH7MGymR6CrzN0b4ZUFxfNoiuszcIaaQmzPrilEMOwcF3sTY7U2TRKOfskqh2b7Rhgthc390KDFSI-qnkv2UNLHkeT-t8dacZ2mWZ_Bv1VD5q19FsjjA_EdRFuovP7xaVzxWl_uOsHfZuEey-iwFkLH0n3Jg0tuYi3MIip4PUOl5Abil4JiB68N7ktlTGzC1EVchnbJQ0ItnAXRkQ_UKQ3g6ibIZjeoDwYM"/>
+</div>
+</div>
+<div class="genre-card relative overflow-hidden rounded-xl bg-[#E8115B] p-md cursor-pointer group">
+<span class="font-headline-md text-headline-md text-white relative z-10">Focus</span>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rotate-[25deg] shadow-xl transition-transform group-hover:rotate-[15deg]">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Macro photography of organic, crystalline structures with a deep red and magenta glow. The sharp focus and intricate details evoke concentration and mental clarity. Sophisticated and high-definition visual quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIotlzBQQFSPukOr1MABhzwKxIHkLmvmB1daqS34Seksbu0aVQy3M-yXM0aNaKLDGwMWp7IyFDf4aE2EN-8T6psqcdeIqfxvQTEEFAkNlhhOxEJZbFPTLC0oZ3kSSfeECuI0EaknU0u6AztfMJPHUs1RRboqa4lROPwz29JBEUzHJeTSriRH3zs_U-IXdDsiMWo70e8xaLRaqHmYYAadWZ9TA_hzljoCBqdjrKpQsXr1WS6zMRPfg1cLll6hS1ic2-sAWrhpDw9A4"/>
+</div>
+</div>
+<div class="genre-card relative overflow-hidden rounded-xl bg-[#1E3264] p-md cursor-pointer group">
+<span class="font-headline-md text-headline-md text-white relative z-10">Workout</span>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rotate-[25deg] shadow-xl transition-transform group-hover:rotate-[15deg]">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Dynamic abstract motion blur of light trails in dark navy and electric blue. Conveys a sense of high speed, movement, and physical energy suitable for a workout-themed music category. Minimalist and sleek." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoqOTfbtUPKJh88EKL1xMkOSOWW8pAoEe-Ac2aQI2r8rpEgIqFIgeYrzRCq2TyqVdrCm0PH4LV7Su6y_YDiXGfUsj5DTTYOy3gGLVVUjndGpuJpa9N4ogHvBxFZUmRVghsgMnQMFC-iluUIQKDYPYvMpL71YE_bZU2Ydtji7qHg9wge0BFc4IDW4sAHZHJdTuV6uiGFEsNAioLJ7nu3oZYiNF-AEym9RAZb5_N_6K9dEz3-hqYmAupSuA6aETd3lkGWnmHKlp0a_I"/>
+</div>
+</div>
+<div class="genre-card relative overflow-hidden rounded-xl bg-[#148A08] p-md cursor-pointer group">
+<span class="font-headline-md text-headline-md text-white relative z-10">Fresh</span>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rotate-[25deg] shadow-xl transition-transform group-hover:rotate-[15deg]">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Close-up of vibrant green botanical elements with dew drops, captured with a shallow depth of field. Clean, organic, and refreshing aesthetic. Bright forest green tones balanced by soft morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvVJYdpPe7XNCa5K1jXTHPdu8E-C8_LicbXOwrxw9XNLzWAWP4upqrxGBHfXu-Yp-6mlcMK-z6EHFFzwLIvtTc6B6VJtmTd5rWyAP6rdhlcH8dPUN51PrbKn1PB8pTeC9rAJvohudMQ926WsbQPONVr-5zPk-s6WBUEvOwHt1Llc-6s0LdVOFrxrN-Y9m39kgw1S7s2DEXz5rWaAkWcALHhTyitQihie-qCjeSyvDAfZ_X0KiVLcgAlqYOZKyjCWLTayBgLarwOak"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Songs Result Section -->
+<section class="space-y-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Recent Results</h2>
+<div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
+<th class="px-lg py-md w-12 text-center">#</th>
+<th class="px-lg py-md">Title</th>
+<th class="px-lg py-md hidden md:table-cell">Album</th>
+<th class="px-lg py-md text-right"><span class="material-symbols-outlined" data-icon="schedule">schedule</span></th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<!-- Song Row 1 -->
+<tr class="track-row group cursor-pointer transition-colors">
+<td class="px-lg py-md text-center text-on-surface-variant">
+<span class="group-hover:hidden">1</span>
+<span class="material-symbols-outlined hidden group-hover:inline text-primary" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-surface-container-high rounded shadow-sm overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Abstract album artwork with fluid holographic gradients in violet and silver. A modern, tech-focused music aesthetic that feels premium and digital. Soft light reflecting off a metallic surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACLSgy9n-bRm0Ewvy_hex6Dpl_9n4aNt5SBliDIP1s8mNVKxXl_Di86Dx6a4LfC5uHikODJ4EiNyfMfVhkfKakKiAHXtNaAixDLkt8YBETCbMdJ0dCqUGq1bMdgfmpttLpEqeW6eNew5qkEntBq4dPcwFJFXhzGn_tFbOA--RIV3ss1U8LNfgAUbW4GQH1W_l3I8xlJmmRBnHd2gjtlauEWZHbDgu-yRIuvzwAcNpoIljn1Gg8uS6WYG6KD7bhF_Sb6I64pJLA9yM"/>
+</div>
+<div>
+<p class="font-bold">Midnight Echoes</p>
+<p class="text-sm text-on-surface-variant">Lumina Flux</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md hidden md:table-cell text-on-surface-variant">Temporal Waves</td>
+<td class="px-lg py-md text-right text-on-surface-variant tabular-nums">3:42</td>
+</tr>
+<!-- Song Row 2 -->
+<tr class="track-row group cursor-pointer transition-colors">
+<td class="px-lg py-md text-center text-on-surface-variant">
+<span class="group-hover:hidden">2</span>
+<span class="material-symbols-outlined hidden group-hover:inline text-primary" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-surface-container-high rounded shadow-sm overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Minimalist architectural photography of a brutalist concrete building against a sharp, clear deep blue sky. Strong shadows and clean lines. An album cover that suggests precision and structural ambient music." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO2qbuXOYYd7frTnkjuI3B_wChxF_BI2JviMh-U7wcESjhI90oLr6SmLVum4nA0H8Kl-sHDXdIa6L4qzTq16DJs2cKX92E3RxI5MZVlJ5RLjQueugv7F8a3H8TUE7SY5AGWmSs68aYernSpY4KMJRZiDkkWZec_C6GIp5EJ8H5MvlAoMa9hQtVQePjFZDCoMnbLI8glopu3z0O2on6F2WYCI8JBXJhjCgisKxQlAcDLgOl2HhsPsK1epAjq3cNstaYY4p9lONJd80"/>
+</div>
+<div>
+<p class="font-bold">Static Dreams</p>
+<p class="text-sm text-on-surface-variant">The Grid</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md hidden md:table-cell text-on-surface-variant">Monolith</td>
+<td class="px-lg py-md text-right text-on-surface-variant tabular-nums">4:15</td>
+</tr>
+<!-- Song Row 3 -->
+<tr class="track-row group cursor-pointer transition-colors">
+<td class="px-lg py-md text-center text-on-surface-variant">
+<span class="group-hover:hidden">3</span>
+<span class="material-symbols-outlined hidden group-hover:inline text-primary" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-surface-container-high rounded shadow-sm overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a singer obscured by colorful smoke in shades of orange and purple. The lighting is dramatic and cinematic, with a high-fashion music magazine feel. Sophisticated urban vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ3c2wCcOV2sFI681AmGuh47dV1sj-Z39iFhh2cejFG5OpzBH7LKRq4Pww8e4HdA32ZKRwPLAYys9l_iij1GlmQMHYjIEyRDYvDAETyOq1nWashZUnz8RxtxPHKOBaUa3Se183OpEwpwLFCSD6i-_AOOQ2407FKSOYkHnjvEyvZYlIZpAT0noEzUpy-CkbOvxrDHh1aIhtvuH1fyjfK713e0qZPdDgK0lWhb5LYuPal9p219pTaf8qE5UITosBZdjXPo8i4fv9xCc"/>
+</div>
+<div>
+<p class="font-bold">Vibrant Hush</p>
+<p class="text-sm text-on-surface-variant">Orion Keys</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md hidden md:table-cell text-on-surface-variant">Neon Soul</td>
+<td class="px-lg py-md text-right text-on-surface-variant tabular-nums">2:58</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Footer Anchor -->
+<footer class="flex flex-col md:flex-row justify-between items-center p-lg ml-0 md:ml-0 border-t border-outline-variant bg-surface-container-lowest mt-auto">
+<div class="mb-md md:mb-0">
+<span class="font-bold text-on-surface font-label-sm text-label-sm">© 2024 Aura Music</span>
+</div>
+<div class="flex gap-lg">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Legal</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Cookies</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar Anchor (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-16 md:hidden bg-surface-container-highest dark:bg-surface-container-highest z-50 rounded-t-xl shadow-[0_-4px_12px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm tap-highlight-transparent active:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-label-sm text-label-sm tap-highlight-transparent active:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span>Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm tap-highlight-transparent active:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined" data-icon="subscriptions">subscriptions</span>
+<span>Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm tap-highlight-transparent active:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+<span>Premium</span>
+</a>
+</nav>
+<!-- Persistent Player Bar (Global Anchor) -->
+<div class="fixed bottom-0 left-0 right-0 h-24 bg-surface-container/95 backdrop-blur-xl border-t border-outline-variant z-[60] flex items-center justify-between px-lg md:px-xl">
+<!-- Track Info -->
+<div class="flex items-center gap-md w-1/3 min-w-0">
+<div class="w-14 h-14 bg-surface-container-high rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Album cover art featuring a lone neon light in a dark foggy environment. Moody, cinematic, and minimal aesthetic that complements the dark UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhiaZoD95VA2RPng-dNrMsbTYeMDfA7929-mQdxkzc26_oulIoTghOBL8_mllbZneITLwi_yMbmGn0paozGkFyvRMmH7dWg8Nyeurc-jmtqhShRuNh-WUpxLnJJiUewca2YZpHJAlgOXzce996x229ff_XN5FzKqxe9wgUVQLJ1qDaJmSQRG2RfyjfQw6JBJoh21pUyeauDHu5sOxRup_TkjYiDHNjVSb4ZdiH-XnIV2kRHM2WJdO0M2ZKuI1u-8_sWcCJnSckRlQ"/>
+</div>
+<div class="hidden sm:block truncate">
+<h4 class="font-bold text-on-surface text-sm truncate">Temporal Waves</h4>
+<p class="text-xs text-on-surface-variant truncate">Lumina Flux</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors ml-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<!-- Player Controls -->
+<div class="flex flex-col items-center gap-xs w-full max-w-xl">
+<div class="flex items-center gap-lg">
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="shuffle">shuffle</span></button>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="skip_previous">skip_previous</span></button>
+<button class="w-10 h-10 bg-on-surface text-surface rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="skip_next">skip_next</span></button>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="repeat">repeat</span></button>
+</div>
+<div class="w-full flex items-center gap-sm group">
+<span class="text-[10px] text-on-surface-variant font-mono">1:24</span>
+<div class="flex-1 h-1 bg-outline-variant/30 rounded-full relative cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 bg-primary rounded-full" style="width: 35%;"></div>
+<div class="absolute left-[35%] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1/2"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">3:42</span>
+</div>
+</div>
+<!-- Volume/Misc -->
+<div class="hidden md:flex items-center justify-end gap-md w-1/3">
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="playlist_play">playlist_play</span></button>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="devices">devices</span></button>
+<div class="flex items-center gap-sm w-32">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="volume_up">volume_up</span>
+<div class="flex-1 h-1 bg-outline-variant/30 rounded-full relative cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 bg-on-surface-variant rounded-full" style="width: 70%;"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Simple Micro-interaction for Search Focus
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/40');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/40');
+        });
+
+        // Tab selection logic
+        const tabs = document.querySelectorAll('button[class*="rounded-full"]');
+        tabs.forEach(tab => {
+            if (tab.innerText === 'All' || tab.innerText === 'Songs' || tab.innerText === 'Artists' || tab.innerText === 'Albums' || tab.innerText === 'Playlists') {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        if (t.innerText === 'All' || t.innerText === 'Songs' || t.innerText === 'Artists' || t.innerText === 'Albums' || t.innerText === 'Playlists') {
+                            t.classList.remove('bg-primary', 'text-on-primary');
+                            t.classList.add('bg-surface-container-high', 'text-on-surface');
+                        }
+                    });
+                    tab.classList.add('bg-primary', 'text-on-primary');
+                    tab.classList.remove('bg-surface-container-high', 'text-on-surface');
+                });
+            }
+        });
+    </script>
+</body></html>

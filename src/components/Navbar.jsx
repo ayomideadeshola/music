@@ -1,222 +1,77 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./style.css";
-import Home from "./Home";
 
 const Navbar = () => {
   return (
-    <>
-      <nav className="navbar shadow bg-dark px-md-5 py-md-1 py-3  fixed-top">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <h2 className="fw-bold px-3 text-light">
-              <span className="same-color">Drc</span>
-              <span>-play</span>
-            </h2>
-          </a>
-          <div className="d-md-block d-none">
-            <form className="d-flex offset-md-2" role="search">
-              <input
-                className="form-control width-50 me-2"
-                type="search"
-                placeholder="Search for artists, songs, albums!"
-                aria-label="Search"
-              />
-              <div className="input-group flex-nowrap">
-                <span
-                  className="input-group-text same-color"
-                  id="addon-wrapping"
-                >
-                  <i className="bi bi-search"></i>
-                </span>
-              </div>
-            </form>
-          </div>
-          <span
-            className="navbar-toggler-icon text-light rounded"
-            style={{ backgroundColor: "#fd4414" }}
-            type="button"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-            data-bs-toggle="offcanvas"
-          ></span>
-          <div className="d-md-none d-block">
-            <form className="d-flex sharch-sm offset-md-2 " role="search">
-              <input
-                className="form-control width-50 me-2"
-                type="search"
-                placeholder="Search for artists, songs, albums!"
-                aria-label="Search"
-              />
-              <div className="input-group flex-nowrap">
-                <span
-                  className="input-group-text same-color"
-                  id="addon-wrapping"
-                >
-                  <i className="bi bi-search"></i>
-                </span>
-              </div>
-            </form>
-          </div>
-         
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
+    <aside className="fixed left-0 top-0 h-full w-64 flex flex-col p-6 overflow-y-auto bg-surface-container-lowest border-r border-outline-variant hidden md:flex z-50">
+      <div className="mb-16">
+        <span className="text-2xl font-bold text-primary tracking-tighter">Aura</span>
+        <p className="text-xs text-on-surface-variant opacity-70 mt-1">Premium Audio</p>
+      </div>
+
+      <nav className="flex flex-col gap-2 flex-grow">
+        <Link
+          to="/"
+          className="flex items-center gap-4 p-2 text-primary font-bold transition-colors duration-200 text-sm"
+        >
+          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>home</span>
+          <span>Home</span>
+        </Link>
+        <a
+          href="#"
+          className="flex items-center gap-4 p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 text-sm"
+        >
+          <span className="material-symbols-outlined">search</span>
+          <span>Search</span>
+        </a>
+        <a
+          href="#"
+          className="flex items-center gap-4 p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 text-sm"
+        >
+          <span className="material-symbols-outlined">library_music</span>
+          <span>Library</span>
+        </a>
+
+        <div className="mt-10">
+          <button className="w-full py-4 px-6 bg-primary-container text-on-primary-container rounded-xl text-xs font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+            <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>add</span>
+            Create Playlist
+          </button>
+        </div>
+
+        <div className="mt-16 flex flex-col gap-2">
+          <p className="text-xs text-on-surface-variant uppercase tracking-widest px-2 mb-1">Your Music</p>
+          <a
+            href="#"
+            className="flex items-center gap-4 p-2 text-on-surface-variant hover:text-primary transition-colors text-xs"
           >
-            <div className="offcanvas-header">
-              <h5
-                className="offcanvas-title text-light fw-bold"
-                id="offcanvasNavbarLabel"
-              >
-                BROWS
-              </h5>
-              <button
-                type="button"
-                className="btn-close bg-light rounded"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a
-                    class="bi bi-house-door-fill gap-md-1 nav-link px-3 mt-1 fs-5  fw-bold"
-                    aria-current="page"
-                    href="#"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-graph-up-arrow fw-bolder px-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Trending
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-file-earmark-music-fill fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Top Song
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-music-note-list fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Playlist
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-people-fill fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Supporters
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-person-circle fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Account for you
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-file-earmark-plus-fill fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Recently Added
-                  </a>
-                </li>
-                <h5 class="fw-bold px-3 mt-2 text-danger">MY LIBRARY</h5>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-person-lines-fill fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Feed
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <Link
-                    class="nav-link bi bi-plus fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    to={"/playlist"}
-                  >
-                    Playlists
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link bi bi-upload fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
-                  >
-                    Uploads
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+            <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>favorite</span>
+            Liked Songs
+          </a>
+          <a
+            href="#"
+            className="flex items-center gap-4 p-2 text-on-surface-variant hover:text-primary transition-colors text-xs"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>auto_awesome</span>
+            Discover Weekly
+          </a>
         </div>
       </nav>
-      <section className="front-img">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="mt-top d-md-flex">
-                <div>
-                  <h1
-                    className="h1-font mt-5 col-md-8 col-10"
-                    style={{ color: "#fd4414" }}
-                  >
-                    Immerse Yourself in Musical Bliss
-                  </h1>
-                  <h3 className="mt-5 mb-5 col-9" style={{ color: "#fd4414" }}>
-                    Unleash your musical potential with Drc-Paly's seamless
-                    payments.
-                  </h3>
-                </div>
-                <div className="img-border">
-                  <div className="mt-4  side-img"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section>
-        <div className="container mt-md-5 mt-3">
-          <div className="row">
-            <div className="col-sm-12 rounded box-shadow-ful">
-              <div className="text-light d-flex rounded justify-content-between fs-2 py-2 px-2 bg-black fw-bolder">
-                <div>
-                  <span className="bi same-color bi-graph-up-arrow fw-bolder "></span>
-                  <small className="fs-4 ms-1">Trending Songs</small>
-                  <span className="same-color font-10">
-                    Submit to Trending & Playlists
-                  </span>
-                </div>
-                <button className="btn text-light same-bg col-md-2 col-1 col-5 fw-bold px-3 fs-5">
-                  Upload
-                </button>
-              </div>
-              <Home />
-            </div>
-          </div>
+      <div className="mt-auto pt-6 border-t border-outline-variant flex items-center gap-4">
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0">
+          <img
+            className="w-full h-full object-cover"
+            src="https://img.freepik.com/premium-photo/candid-shot-excited-young-african-man-party-with-headphones-beautiful-generative-ai-aig32_31965-210599.jpg?w=100"
+            alt="User"
+          />
         </div>
-      </section>
-    </>
+        <div className="flex flex-col min-w-0">
+          <span className="text-xs text-on-surface font-bold truncate">User Profile</span>
+          <span className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Premium Plan</span>
+        </div>
+      </div>
+    </aside>
   );
 };
 

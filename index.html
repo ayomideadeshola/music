@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
+    <title>Aura Music</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#cbc3d7",
+              "surface-container-low": "#1a1b20",
+              "surface-container-lowest": "#0d0e12",
+              "surface-container": "#1f1f24",
+              "outline-variant": "#494454",
+              "background": "#121317",
+              "surface-container-high": "#292a2e",
+              "surface-container-highest": "#343439",
+              "secondary-container": "#4f319c",
+              "secondary": "#cebdff",
+              "primary-fixed-dim": "#d0bcff",
+              "primary": "#d0bcff",
+              "on-surface": "#e3e2e7",
+              "surface-bright": "#38393d",
+              "primary-fixed": "#e9ddff",
+              "on-primary-container": "#340080",
+              "outline": "#958ea0",
+              "tertiary": "#ffb869",
+              "inverse-primary": "#6d3bd7",
+              "on-background": "#e3e2e7",
+              "primary-container": "#a078ff",
+              "on-primary": "#3c0091",
+              "surface": "#121317",
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
   </body>
 </html>
